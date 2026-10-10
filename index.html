@@ -3,47 +3,93 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Boomsquad Stats – Albion Online</title>
+<meta name="theme-color" content="#0b0908" />
+<title>Boomsquad Stats · Albion Online</title>
+<meta name="description" content="Paste an AlbionBB battle link, drop your boomsquad list, get kills, deaths, K/D and comp summed up." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-<main>
-  <header>
-    <h1>💥 Boomsquad Stats</h1>
-    <p class="sub">Paste an AlbionBB battle link, attach your squad list, and get kills, deaths and comp summed up. Europe server.</p>
-  </header>
+<nav class="nav">
+  <a href="#home" class="active"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#calc"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Calculate</a>
+  <a href="#how"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>How it works</a>
+</nav>
 
-  <section class="card form">
-    <label>AlbionBB battle link
-      <input id="battle" placeholder="https://europe.albionbb.com/battles/123456789  (multi-battle links work too)" autocomplete="off" />
+<header class="hero" id="home">
+  <div class="hero-text">
+    <span class="badge"><i></i>Live · Europe server</span>
+    <h1>Stop counting<br />kills by hand.</h1>
+    <h2 class="typed"><span id="typed">Kills. Deaths. K/D. Comp.</span><b class="caret">|</b></h2>
+    <p class="lead">Drop an AlbionBB battle link and your boomsquad's name list. Get the whole squad's impact summed up in seconds: kills, deaths, K/D, IP and the comp you ran.</p>
+    <div class="meta">
+      <span><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>EU server</span>
+      <span><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Multi-battle links</span>
+      <span><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>Shareable results</span>
+    </div>
+    <div class="cta">
+      <a class="btn" href="#calc">→ Count my squad</a>
+      <a class="btn ghost" href="#how">How it works</a>
+    </div>
+    <hr />
+    <p class="small">Numbers come straight from <b>AlbionBB</b>, so they match what you see there.</p>
+  </div>
+  <div class="hero-art"><div class="glow"></div><img src="/assets/sword.webp" alt="Rune sword" width="640" height="956" /></div>
+</header>
+
+<section id="calc" class="section">
+  <div class="sec-head"><span class="num">01</span><h3>Count your squad</h3></div>
+  <div class="panel">
+    <label class="field">
+      <span>AlbionBB battle link</span>
+      <input id="battle" placeholder="https://europe.albionbb.com/battles/123456789  ·  multi-battle links work too" autocomplete="off" />
     </label>
-    <label>Squad members (.txt, one name per line)
-      <input id="file" type="file" accept=".txt,text/plain" multiple />
-    </label>
-    <label>…or paste names
-      <textarea id="names" rows="5" placeholder="Player1&#10;Player2&#10;Player3"></textarea>
-    </label>
+    <div class="grid2">
+      <label class="drop" id="drop">
+        <input id="file" type="file" accept=".txt,text/plain" multiple />
+        <svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <b>Drop squad .txt here</b>
+        <span id="fileinfo">or click to choose · one name per line</span>
+      </label>
+      <label class="field">
+        <span>…or paste names <em id="count"></em></span>
+        <textarea id="names" rows="6" placeholder="Player1&#10;Player2&#10;Player3"></textarea>
+      </label>
+    </div>
     <div class="row">
-      <button id="go">Calculate</button>
-      <button id="share" class="ghost" hidden>🔗 Copy share link</button>
+      <button id="go" class="btn">→ Calculate</button>
+      <button id="share" class="btn ghost" hidden>🔗 Copy share link</button>
       <span id="status"></span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="results" hidden>
-    <div class="cards" id="summary"></div>
-    <div class="card">
-      <h2>Comp</h2>
-      <div id="comp" class="comp"></div>
-    </div>
-    <div class="card">
-      <h2>Members</h2>
-      <div class="tablewrap"><table id="table"></table></div>
-      <p id="missing" class="muted"></p>
-    </div>
-  </section>
-  <footer class="muted">Data: AlbionBB API (Europe). Single and multi-battle links supported. Comp = each member's main weapon in the fight.</footer>
-</main>
+<section id="results" class="section" hidden>
+  <div class="sec-head"><span class="num">02</span><h3>Squad impact</h3><span id="battleinfo" class="muted"></span></div>
+  <div class="scoreboard" id="summary"></div>
+  <div class="panel">
+    <h4>Comp</h4>
+    <div id="comp" class="comp"></div>
+  </div>
+  <div class="panel">
+    <h4>Members</h4>
+    <div class="tablewrap"><table id="table"></table></div>
+    <p id="missing" class="muted"></p>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="sec-head"><span class="num">03</span><h3>How it works</h3></div>
+  <div class="steps">
+    <div><b>1</b><h5>Copy the battle link</h5><p>Open the fight on europe.albionbb.com and copy the URL. Combined multi-battle links work too.</p></div>
+    <div><b>2</b><h5>Drop your list</h5><p>A .txt with one name per line. Upper or lower case doesn't matter.</p></div>
+    <div><b>3</b><h5>Share the result</h5><p>Copy the link and post it in Discord. It reopens the same battle and squad.</p></div>
+  </div>
+</section>
+
+<footer>Boomsquad Stats · not affiliated with Sandbox Interactive or AlbionBB</footer>
 <script src="/app.js" type="module"></script>
 </body>
 </html>

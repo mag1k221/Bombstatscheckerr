@@ -2,11 +2,11 @@
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
-import handler from "./api/battle.js";
-const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css" };
+import handler from "./api/stats.js";
+const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".webp": "image/webp" };
 http.createServer(async (req, res) => {
   const u = new URL(req.url, "http://localhost");
-  if (u.pathname === "/api/battle") {
+  if (u.pathname === "/api/stats") {
     req.query = Object.fromEntries(u.searchParams);
     res.status = (c) => ((res.statusCode = c), res);
     res.json = (o) => (res.setHeader("Content-Type", "application/json"), res.end(JSON.stringify(o)));
