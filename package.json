@@ -1,0 +1,8 @@
+{
+  "name": "boomsquad-stats",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sum up kills, deaths and comp of your Albion Online boomsquad for an AlbionBB battle",
+  "engines": { "node": ">=18" }
+}

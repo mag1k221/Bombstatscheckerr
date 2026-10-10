@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Boomsquad Stats – Albion Online</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<main>
+  <header>
+    <h1>💥 Boomsquad Stats</h1>
+    <p class="sub">Paste an AlbionBB battle link, attach your squad list, and get kills, deaths and comp summed up. Europe server.</p>
+  </header>
+
+  <section class="card form">
+    <label>AlbionBB battle link
+      <input id="battle" placeholder="https://europe.albionbb.com/battles/123456789" autocomplete="off" />
+    </label>
+    <label>Squad members (.txt, one name per line)
+      <input id="file" type="file" accept=".txt,text/plain" multiple />
+    </label>
+    <label>…or paste names
+      <textarea id="names" rows="5" placeholder="Player1&#10;Player2&#10;Player3"></textarea>
+    </label>
+    <div class="row">
+      <button id="go">Calculate</button>
+      <button id="share" class="ghost" hidden>🔗 Copy share link</button>
+      <span id="status"></span>
+    </div>
+  </section>
+
+  <section id="results" hidden>
+    <div class="cards" id="summary"></div>
+    <div class="card">
+      <h2>Comp</h2>
+      <div id="comp" class="comp"></div>
+    </div>
+    <div class="card">
+      <h2>Members</h2>
+      <div class="tablewrap"><table id="table"></table></div>
+      <p id="missing" class="muted"></p>
+    </div>
+  </section>
+  <footer class="muted">Data: official Albion Online API (same source as AlbionBB). Comp shows weapons seen in the battle's kill events.</footer>
+</main>
+<script src="/app.js" type="module"></script>
+</body>
+</html>
