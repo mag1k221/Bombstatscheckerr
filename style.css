@@ -17,7 +17,7 @@ button:disabled{opacity:.5;cursor:wait}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
 .stat b{display:block;font-size:26px}.stat span{color:var(--muted);font-size:13px}
-.good{color:var(--good)}.bad{color:var(--bad)}
+.good{color:var(--good)}.bad{color:var(--bad)}.fame{color:var(--acc)}
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse}
 th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
